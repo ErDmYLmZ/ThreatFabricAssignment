@@ -21,8 +21,9 @@
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
-        <cucumber.reporting.version>5.7.6</cucumber.reporting.version>
         <microsoft.playwright.version>1.47.0</microsoft.playwright.version>
+        <extentreports-cucumber7-adapter.version>1.7.0</extentreports-cucumber7-adapter.version>
+        <cucumber-reporting.version>5.8.0</cucumber-reporting.version>
         <slf4j.version>2.0.9</slf4j.version>
     </properties>
     <dependencies>
@@ -51,10 +52,15 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>5.4.0</version>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>com.microsoft.playwright</groupId>
@@ -62,9 +68,14 @@
             <version>${microsoft.playwright.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber7-adapter</artifactId>
+            <version>${extentreports-cucumber7-adapter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>${cucumber-reporting.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -83,12 +94,41 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
-                    <includes>
-                        <include>**/*TestRunner.java</include>
-                    </includes>
+                        <includes>
+                            <include>**/*TestAllRunner.java</include>
+                            <include>**/*TestApiRunner.java</include>
+                            <include>**/*TestUiRunner.java</include>
+                        </includes>
+                    <useSystemClassLoader>true</useSystemClassLoader>
+                    <reportsDirectory>${project.build.directory}/test-reports/surefire-reports</reportsDirectory>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>${cucumber-reporting.version}</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>cucumber-framework</projectName>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <inputDirectory>${project.build.directory}</inputDirectory>
+                            <jsonFiles>
+                                <pram>**/json-reports/*.json</pram>
+                            </jsonFiles>
+                            <classificationFiles>->
+                                <param>sample.properties</param>
+                                <param>other.properties</param>
+                            </classificationFiles>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

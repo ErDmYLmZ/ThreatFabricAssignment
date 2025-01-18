@@ -11,15 +11,34 @@ This project provides a test automation framework for validating the Open Librar
 - Maven
 
 ## Setup Instructions
-1. Clone this repository: `git clone <repo-url>`
-2. Navigate to the project directory: `cd openlibrary-tests`
-3. Run API tests: `mvn test -Dtest=OpenLibraryAPITests`
-4. Run UI tests: `mvn test -Dtest=OpenLibraryUITests`
-5. Run Cucumber tests: `mvn test -Dcucumber.features=src/test/resources/features`
+1. Clone this repository: [git clone](https://github.com/ErDmYLmZ/ThreatFabricAssignment.git) 
+2. Navigate to the project directory: `cd ThreatFabricAssignment`
+* Run all tests: `mvn test -Dtest=com.threat_fabric.runners.AllTestsRunner`
+* Run API tests: `mvn test -Dtest=com.threat_fabric.runners.ApiTestsRunner`
 
-## Additional Tests
-1. Validate the correct ISBN for a selected book via the API.
-2. Validate search functionality for different keywords in the UI.
+    
+* Run UI tests with a defined browser: `mvn test -Dtest=com.threat_fabric.runners.UiTestsRunner`
+   
+    -_To run the UI tests with a defined browser, please add the `-Dbrowser=webkit` or `-Dbrowser=firefox`at the end of mvn command. (Since the default browser is chrome, no need to add `-Dbrowser=chrome` at the end of mvn command.). Example: `mvn test -Dtest=com.threat_fabric.runners.UiTestsRunner -Dbrowser=webkit`_
 
+
+* Run CrossBrowser tests: `mvn test -Dtest=CrossBrowserRunner`
+
+    -_To run cross-browser UI testing sequentially with a single execution._
+
+
+* Run Failed tests : `mvn test -Dtest=com.threat_fabric.runners.FailedTestsRunner`
+
+    -_In case of failed test cases, they are saved into the "failed_tests.txt" file under the target folder. By running this command, the failed tests are re-run._
+---
 ## Test Reports
-Generated reports can be found in the `target/surefire-reports` directory.
+Generated reports can be found in the `target/test-reports` directory. These reports are;
+* cucumber_reports
+* json_reports
+* pdf_reports
+* screenshots
+* spark_report
+* xml_report
+---
+## Contact
+In case of any support/questions, please contact _e.yilmaz.qa@gmail.com_
