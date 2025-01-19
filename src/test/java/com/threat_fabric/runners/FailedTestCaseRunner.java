@@ -17,5 +17,5 @@ import org.junit.runner.RunWith;
         features = "@target/failed-tests.txt",
         glue = {"com/threat_fabric/steps"}
 )
-public class FailedTestsRunner {
+public class FailedTestCaseRunner {
 }

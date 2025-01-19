@@ -17,10 +17,15 @@ This framework ensures adherence to QA best practices while offering modularity,
 
 ---
 ## Setup Instructions
-Clone this repository: [git clone repository](https://github.com/ErDmYLmZ/ThreatFabricAssignment.git) 
+Clone this repository:
+```
+ git clone https://github.com/ErDmYLmZ/ThreatFabricAssignment.git 
+```
 ### To Run the tests via Terminal/Command Prompt 
 1. Navigate to the project directory:
-* `cd ThreatFabricAssignment`
+* ```
+    cd ThreatFabricAssignment
+  ```
 2. Run the required command from the following commands
 * Run all tests: 
   * `mvn test -Dtest=com.threat_fabric.runners.AllTestsRunner`
@@ -33,16 +38,16 @@ Clone this repository: [git clone repository](https://github.com/ErDmYLmZ/Threat
   * `mvn test -Dtest=CrossBrowserRunner`
   _This will execute UI tests sequentially across multiple browsers._
 * Run Failed tests : 
-  * `mvn test -Dtest=com.threat_fabric.runners.FailedTestsRunner`
+  * `mvn test -Dtest=com.threat_fabric.runners.FailedTestCaseRunner`
       _Failed tests are logged in target/failed_tests.txt and can be re-run using this command._
 
 ### To Run the tests via IDE _(recommended IDE: intellij)_
-1. To run the tests via Runner class, 
-   * All tests --> go to "src/test/java/runners/AllTestsRunner.java" and click on the "Run" button.
-   * Api tests --> go to "src/test/java/runners/ApiTestsRunner.java" and click on the "Run" button.
-   * Ui tests --> go to "src/test/java/runners/UiTestsRunner.java" and click on the "Run" button.
-   * Cross browser tests --> go to "src/test/java/runners/CrossBrowserRunner.java" and click on the "Run" button.
-   * Failed tests --> go to "src/test/java/runners/FailedTestsRunner.java" and click on the "Run" button.
+1. To run the tests via Runner class,
+    * All tests: go to `src/test/java/runners/AllTestsRunner.java` and click on the `Run` button.
+    * Api tests: go to `src/test/java/runners/ApiTestsRunner.java` and click on the `Run` button.
+    * Ui tests: go to `src/test/java/runners/UiTestsRunner.java` and click on the `Run` button.
+   * Cross browser tests: go to `src/test/java/runners/CrossBrowserRunner.java` and click on the `Run` button.
+   * Failed tests: go to `src/test/java/runners/FailedTestsRunner.java` and click on the `Run` button.
    
 2. To run all the tests via Maven tab, click on Maven tab then double-click on "test", "verify" or "install.
 

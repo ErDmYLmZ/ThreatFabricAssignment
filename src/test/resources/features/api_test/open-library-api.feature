@@ -7,7 +7,7 @@ Feature: Open Library API Tests
     Then user should be able to retrieve the author details using the author key
     And the author website should match "<links>"
 
-    Examples: Titles and links
+    Examples: Titles, author name and links
       | book titles           | author name    | links                                    |
       | Harry Potter          | J. K. Rowling  | http://www.jkrowling.com/                |
       | The Lord of the Rings | J.R.R. Tolkien | http://www.tolkiensociety.org/index.html |
@@ -18,10 +18,10 @@ Feature: Open Library API Tests
   Scenario Outline: Validate Author works are belong to the author
     Given the Open Library search API is available
     When a user searches for a book titled "<book titles>"
-    And user should be able to get the number of total works of the author
+    And user should be able to get the number of total works of the author to set the maximum limit as query parameter
     Then all the author works should have the author key
 
-    Examples: Total size and limit
+    Examples: Book titles
       | book titles           |
       | Harry Potter          |
       | The Lord of the Rings |

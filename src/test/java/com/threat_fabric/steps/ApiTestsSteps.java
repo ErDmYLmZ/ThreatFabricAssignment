@@ -39,8 +39,8 @@ public class ApiTestsSteps extends TestBase {
         authorKey = response.jsonPath().getString("docs[0].author_key[0]");
     }
 
-    @And("user should be able to get the number of total works of the author")
-    public void userShouldBeAbleToGetTheTotalWorksOfTheAuthor() {
+    @And("user should be able to get the number of total works of the author to set the maximum limit as query parameter")
+    public void userShouldBeAbleToGetTheTotalWorksOfTheAuthorToSetTheMaximumLimitAsQueryParameter() {
         authorResponse = given()
                 .when()
                 .get(ConfigurationReader.get("authors") + authorKey + ConfigurationReader.get("works"));
