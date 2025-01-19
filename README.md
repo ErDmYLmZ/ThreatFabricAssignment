@@ -17,28 +17,35 @@ This framework ensures adherence to QA best practices while offering modularity,
 
 ---
 ## Setup Instructions
-1. Clone this repository: [git clone](https://github.com/ErDmYLmZ/ThreatFabricAssignment.git) 
-2. Navigate to the project directory:
-
-`cd ThreatFabricAssignment`
-3. Execute tests
+Clone this repository: [git clone repository](https://github.com/ErDmYLmZ/ThreatFabricAssignment.git) 
+### To Run the tests via Terminal/Command Prompt 
+1. Navigate to the project directory:
+* `cd ThreatFabricAssignment`
+2. Run the required command from the following commands
 * Run all tests: 
   * `mvn test -Dtest=com.threat_fabric.runners.AllTestsRunner`
 * Run API tests: 
   * `mvn test -Dtest=com.threat_fabric.runners.ApiTestsRunner`
-
 * Run UI tests (with a defined browser): 
   * `mvn test -Dtest=com.threat_fabric.runners.UiTestsRunner -Dbrowser=<browser_name>`
   _Replace <browser_name> with webkit, firefox, or chrome (default)._
-
 * Run CrossBrowser tests: 
   * `mvn test -Dtest=CrossBrowserRunner`
   _This will execute UI tests sequentially across multiple browsers._
-
 * Run Failed tests : 
   * `mvn test -Dtest=com.threat_fabric.runners.FailedTestsRunner`
       _Failed tests are logged in target/failed_tests.txt and can be re-run using this command._
-  
+
+### To Run the tests via IDE _(recommended IDE: intellij)_
+1. To run the tests via Runner class, 
+   * All tests --> go to "src/test/java/runners/AllTestsRunner.java" and click on the "Run" button.
+   * Api tests --> go to "src/test/java/runners/ApiTestsRunner.java" and click on the "Run" button.
+   * Ui tests --> go to "src/test/java/runners/UiTestsRunner.java" and click on the "Run" button.
+   * Cross browser tests --> go to "src/test/java/runners/CrossBrowserRunner.java" and click on the "Run" button.
+   * Failed tests --> go to "src/test/java/runners/FailedTestsRunner.java" and click on the "Run" button.
+   
+2. To run all the tests via Maven tab, click on Maven tab then double-click on "test", "verify" or "install.
+
 ---
 ## Test Reports
 Test reports are automatically generated and stored in the `target/test-reports` directory. Reports include:
@@ -57,7 +64,6 @@ The framework uses the following dependencies (defined in pom.xml):
 * Cucumber: For BDD support.
 * Playwright (Java): For UI automation.
 * Dependencies are automatically managed via Maven.
-
 ---
 
 ## Rationale Behind Choices
@@ -180,3 +186,8 @@ The framework is designed to provide a modular and scalable test automation solu
 ## Contact
 For support or questions, please contact:
 * _e.yilmaz.qa@gmail.com_
+
+### Note:
+* _Although the expected top-rated book of the J.K.Rowling is "Harry Potter and the Half-Blood Prince" in the given assignment,
+the actual top-rated book is "Harry Potter and the Prisoner of Azkaban" on the url "https://openlibrary.org/authors/OL23919A/J._K._Rowling?sort=rating".
+Therefore, "Harry Potter and the Prisoner of Azkaban" is used as the expected test data instead of "Harry Potter and the Half-Blood Prince"._

@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 
 public class TestBase {
     protected Response response;
+    protected Response authorResponse;
     protected String authorKey;
     protected int totalSize;
 

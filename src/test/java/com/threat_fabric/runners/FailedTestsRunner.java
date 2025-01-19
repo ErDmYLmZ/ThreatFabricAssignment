@@ -8,13 +8,13 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {
                 "pretty",
-                "html:target/test-reports/cucumber_reports/cucumber-reports.html",
-                "json:target/test-reports/json_reports/cucumber.json",
-                "junit:target/test-reports/xml_report/cucumber.xml",
+                "html:target/test-reports/cucumber-reports/cucumber-reports.html",
+                "json:target/test-reports/json-reports/cucumber.json",
+                "junit:target/test-reports/xml-report/cucumber.xml",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
 
         },
-        features = "@target/failed_tests.txt",
+        features = "@target/failed-tests.txt",
         glue = {"com/threat_fabric/steps"}
 )
 public class FailedTestsRunner {

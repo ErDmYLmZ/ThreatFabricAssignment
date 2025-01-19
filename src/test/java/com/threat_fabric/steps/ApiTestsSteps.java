@@ -4,7 +4,6 @@ import com.threat_fabric.test_base.TestBase;
 import com.threat_fabric.utils.ConfigurationReader;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class ApiTestsSteps extends TestBase {
 
     @When("a user searches for a book titled {string}")
     public void aUserSearchesForABookTitled(String title) {
-        Response response = given()
+        response = given()
                 .queryParam("title", title)
                 .when()
                 .get(ConfigurationReader.get("search"));
@@ -42,7 +41,7 @@ public class ApiTestsSteps extends TestBase {
 
     @And("user should be able to get the number of total works of the author")
     public void userShouldBeAbleToGetTheTotalWorksOfTheAuthor() {
-        Response authorResponse = given()
+        authorResponse = given()
                 .when()
                 .get(ConfigurationReader.get("authors") + authorKey + ConfigurationReader.get("works"));
         authorResponse.then().statusCode(200);
@@ -51,7 +50,7 @@ public class ApiTestsSteps extends TestBase {
 
     @Then("all the author works should have the author key")
     public void allTheAuthorWorksShouldHaveTheAuthorKey() {
-        Response authorResponse = given()
+        authorResponse = given()
                 .queryParam("limit", totalSize)
                 .when()
                 .get(ConfigurationReader.get("authors") + authorKey + ConfigurationReader.get("works"));
@@ -63,7 +62,7 @@ public class ApiTestsSteps extends TestBase {
 
     @Then("user should be able to retrieve the author details using the author key")
     public void userShouldBeAbleToRetrieveTheAuthorDetailsUsingTheAuthorKey() {
-        Response authorResponse = given()
+        authorResponse = given()
                 .when()
                 .get(ConfigurationReader.get("authors") + authorKey + ".json");
         assertEquals("Expected status code 200 for author details", 200, authorResponse.getStatusCode());
@@ -71,7 +70,7 @@ public class ApiTestsSteps extends TestBase {
 
     @Then("the author website should match {string}")
     public void theAuthorWebsiteShouldMatch(String expectedWebsite) {
-        Response authorResponse = given()
+        authorResponse = given()
                 .when()
                 .get(ConfigurationReader.get("authors") + authorKey + ".json");
         List<String> actualWebsite = authorResponse.jsonPath().getList("links.url");
