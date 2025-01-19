@@ -14,12 +14,12 @@ import static org.junit.Assert.*;
 public class ApiTestsSteps extends TestBase {
 
     @Given("the Open Library search API is available")
-    public void the_open_library_search_api_is_available() {
+    public void theOpenLibrarySearchApiIsAvailable() {
         RestAssured.baseURI = ConfigurationReader.get("baseUrl");
     }
 
-    @When("I search for a book titled {string} and the {string}")
-    public void i_search_for_a_book_by_title_and_author(String title, String author) {
+    @When("a user searches for a book titled {string} and the {string}")
+    public void aUserSearchesForABookByTitleAndAuthor(String title, String author) {
         response = given()
                 .queryParam("title", title)
                 .when()
@@ -30,25 +30,23 @@ public class ApiTestsSteps extends TestBase {
         authorKey = response.jsonPath().getString("docs[0].author_key[0]");
     }
 
-    @When("I search for a book titled {string}")
-    public void i_Search_For_A_BookTitled(String title) {
+    @When("a user searches for a book titled {string}")
+    public void aUserSearchesForABookTitled(String title) {
         Response response = given()
                 .queryParam("title", title)
                 .when()
                 .get(ConfigurationReader.get("search"));
         response.then().statusCode(200);
         authorKey = response.jsonPath().getString("docs[0].author_key[0]");
-
     }
 
-    @And("I should be able to get the number of total works of the author")
-    public void iShouldBeAbleToGetTheTotalWorksOfTheAuthor() {
+    @And("user should be able to get the number of total works of the author")
+    public void userShouldBeAbleToGetTheTotalWorksOfTheAuthor() {
         Response authorResponse = given()
                 .when()
                 .get(ConfigurationReader.get("authors") + authorKey + ConfigurationReader.get("works"));
         authorResponse.then().statusCode(200);
         totalSize = authorResponse.jsonPath().getInt("size");
-
     }
 
     @Then("all the author works should have the author key")
@@ -61,20 +59,18 @@ public class ApiTestsSteps extends TestBase {
 
         List<String> authorKeyList = authorResponse.jsonPath().getList("entries.authors.author.key");
         assertEquals("All the author works should have the author key", totalSize, authorKeyList.size());
-
-
     }
 
-    @Then("I should be able to retrieve the author details using the author key")
-    public void i_should_be_able_to_retrieve_the_author_details_using_the_author_key() {
+    @Then("user should be able to retrieve the author details using the author key")
+    public void userShouldBeAbleToRetrieveTheAuthorDetailsUsingTheAuthorKey() {
         Response authorResponse = given()
                 .when()
                 .get(ConfigurationReader.get("authors") + authorKey + ".json");
         assertEquals("Expected status code 200 for author details", 200, authorResponse.getStatusCode());
     }
 
-    @Then("the author website should be {string}")
-    public void the_author_website_should_be(String expectedWebsite) {
+    @Then("the author website should match {string}")
+    public void theAuthorWebsiteShouldMatch(String expectedWebsite) {
         Response authorResponse = given()
                 .when()
                 .get(ConfigurationReader.get("authors") + authorKey + ".json");

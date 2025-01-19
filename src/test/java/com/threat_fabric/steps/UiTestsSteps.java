@@ -10,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UiTestsSteps extends TestBase {
 
-    @Given("I navigate to the Open Library website")
-    public void i_navigate_to_the_open_library_website() {
+    @Given("a user navigates to the Open Library website")
+    public void aUserNavigatesToTheOpenLibraryWebsite() {
         page.navigate(ConfigurationReader.get("baseUrl"));
         PlaywrightAssertions.assertThat(page).hasTitle("Welcome to Open Library | Open Library");
     }
 
-    @When("I perform an advanced search for {string} by {string}")
-    public void i_perform_an_advanced_search_for_by(String title, String author) {
+    @When("user performs an advanced search for {string} by {string}")
+    public void userPerformsAnAdvancedSearch(String title, String author) {
         if (homePage == null) homePage = new HomePage(page);
         homePage.SearchByOptions();
 
@@ -29,7 +29,7 @@ public class UiTestsSteps extends TestBase {
         assertTrue(page.isVisible("text=" + author), "Author name not visible in search results");
     }
 
-    @When("I click on the author's name {string}")
+    @When("user clicks on the author's name {string}")
     public void i_click_on_the_author_s_name(String authorName) {
         if (searchBooksPage == null) searchBooksPage = new SearchBooksPage(page);
         searchBooksPage.clickAuthorName(authorName);
@@ -37,8 +37,8 @@ public class UiTestsSteps extends TestBase {
         assertTrue(page.url().contains(ConfigurationReader.get("authors")), "Author page URL does not match expected format");
     }
 
-    @When("I sort works by rating")
-    public void i_sort_works_by_rating() {
+    @When("user sorts the works by rating")
+    public void userSortsTheWorksByRating() {
         if (authorPage == null) authorPage = new AuthorPage(page);
         authorPage.clickSortingMenu();
         authorPage.clickTopRatedOption();
@@ -54,8 +54,8 @@ public class UiTestsSteps extends TestBase {
         assertEquals(topRatedWork, actualTopRatedWork, "Top-rated work does not match expected value");
     }
 
-    @When("I log in with {string} and {string}")
-    public void iLogInWithAnd(String email, String password) {
+    @When("user logs in with {string} and {string}")
+    public void userLogsInWithCredentials(String email, String password) {
         if (homePage == null) homePage = new HomePage(page);
         homePage.clickLogIn();
 
@@ -65,15 +65,15 @@ public class UiTestsSteps extends TestBase {
         logInPage.clickLoginButton();
     }
 
-    @And("I go to my profile")
-    public void iGoToMyProfile() {
+    @And("user navigates to my_profile page")
+    public void userNavigatesToMyProfilePage() {
         if (homePage == null) homePage = new HomePage(page);
         homePage.clickHamburgerMenu();
         homePage.clickMyProfile();
     }
 
-    @Then("I assert that the title contains my {string}")
-    public void iAssertThatTheTitleContainsMy(String displayName) {
+    @Then("user asserts that the title contains the {string} of the user")
+    public void userAssertsThatTheTitleContainsDisplayName(String displayName) {
         if (myProfilePage == null) myProfilePage = new MyProfilePage(page);
         String actualDisplayName = myProfilePage.getDisplayName();
 
